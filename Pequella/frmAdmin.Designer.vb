@@ -30,6 +30,10 @@ Partial Class frmAdmin
         Dim DataGridViewCellStyle6 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim DataGridViewCellStyle7 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Dim DataGridViewCellStyle8 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As DataGridViewCellStyle = New DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As DataGridViewCellStyle = New DataGridViewCellStyle()
         Label2 = New Label()
         Panel1 = New Panel()
         Label17 = New Label()
@@ -89,6 +93,22 @@ Partial Class frmAdmin
         TextBox6 = New TextBox()
         Label38 = New Label()
         pnlAccount = New Panel()
+        Label44 = New Label()
+        Label43 = New Label()
+        Label42 = New Label()
+        Label40 = New Label()
+        Label41 = New Label()
+        Label39 = New Label()
+        Label34 = New Label()
+        Label31 = New Label()
+        Label30 = New Label()
+        Label29 = New Label()
+        ComboBox6 = New ComboBox()
+        TextBox10 = New TextBox()
+        TextBox9 = New TextBox()
+        TextBox8 = New TextBox()
+        TextBox7 = New TextBox()
+        DataGridView3 = New DataGridView()
         Panel1.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         Panel2.SuspendLayout()
@@ -100,6 +120,8 @@ Partial Class frmAdmin
         CType(NumericUpDown1, ComponentModel.ISupportInitialize).BeginInit()
         pnlCategory.SuspendLayout()
         CType(DataGridView2, ComponentModel.ISupportInitialize).BeginInit()
+        pnlAccount.SuspendLayout()
+        CType(DataGridView3, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Label2
@@ -853,11 +875,222 @@ Partial Class frmAdmin
         ' 
         ' pnlAccount
         ' 
+        pnlAccount.Controls.Add(Label44)
+        pnlAccount.Controls.Add(Label43)
+        pnlAccount.Controls.Add(Label42)
+        pnlAccount.Controls.Add(Label40)
+        pnlAccount.Controls.Add(Label41)
+        pnlAccount.Controls.Add(Label39)
+        pnlAccount.Controls.Add(Label34)
+        pnlAccount.Controls.Add(Label31)
+        pnlAccount.Controls.Add(Label30)
+        pnlAccount.Controls.Add(Label29)
+        pnlAccount.Controls.Add(ComboBox6)
+        pnlAccount.Controls.Add(TextBox10)
+        pnlAccount.Controls.Add(TextBox9)
+        pnlAccount.Controls.Add(TextBox8)
+        pnlAccount.Controls.Add(TextBox7)
+        pnlAccount.Controls.Add(DataGridView3)
         pnlAccount.Location = New Point(212, 79)
         pnlAccount.Name = "pnlAccount"
         pnlAccount.Size = New Size(950, 635)
         pnlAccount.TabIndex = 29
         pnlAccount.Visible = False
+        ' 
+        ' Label44
+        ' 
+        Label44.AutoSize = True
+        Label44.Font = New Font("Bernard MT Condensed", 28.2F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label44.ForeColor = Color.FromArgb(CByte(169), CByte(52), CByte(85))
+        Label44.Location = New Point(78, 30)
+        Label44.Name = "Label44"
+        Label44.Size = New Size(795, 55)
+        Label44.TabIndex = 44
+        Label44.Text = "User / Account Management + Role System"
+        ' 
+        ' Label43
+        ' 
+        Label43.BackColor = Color.FromArgb(CByte(177), CByte(64), CByte(82))
+        Label43.BorderStyle = BorderStyle.FixedSingle
+        Label43.Font = New Font("Bernard MT Condensed", 18F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label43.ForeColor = SystemColors.ControlLightLight
+        Label43.Location = New Point(638, 544)
+        Label43.Name = "Label43"
+        Label43.Size = New Size(150, 56)
+        Label43.TabIndex = 43
+        Label43.Text = "Delete"
+        Label43.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' Label42
+        ' 
+        Label42.BackColor = Color.FromArgb(CByte(177), CByte(64), CByte(82))
+        Label42.BorderStyle = BorderStyle.FixedSingle
+        Label42.Font = New Font("Bernard MT Condensed", 18F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label42.ForeColor = SystemColors.ControlLightLight
+        Label42.Location = New Point(473, 544)
+        Label42.Name = "Label42"
+        Label42.Size = New Size(150, 56)
+        Label42.TabIndex = 42
+        Label42.Text = "Update"
+        Label42.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' Label40
+        ' 
+        Label40.BackColor = Color.FromArgb(CByte(177), CByte(64), CByte(82))
+        Label40.BorderStyle = BorderStyle.FixedSingle
+        Label40.Font = New Font("Bernard MT Condensed", 18F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label40.ForeColor = SystemColors.ControlLightLight
+        Label40.Location = New Point(140, 543)
+        Label40.Name = "Label40"
+        Label40.Size = New Size(150, 56)
+        Label40.TabIndex = 41
+        Label40.Text = "Refresh"
+        Label40.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' Label41
+        ' 
+        Label41.BackColor = Color.FromArgb(CByte(177), CByte(64), CByte(82))
+        Label41.BorderStyle = BorderStyle.FixedSingle
+        Label41.Font = New Font("Bernard MT Condensed", 18F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label41.ForeColor = SystemColors.ControlLightLight
+        Label41.Location = New Point(308, 544)
+        Label41.Name = "Label41"
+        Label41.Size = New Size(150, 56)
+        Label41.TabIndex = 40
+        Label41.Text = "Insert"
+        Label41.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' Label39
+        ' 
+        Label39.AutoSize = True
+        Label39.Font = New Font("Berlin Sans FB", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label39.ForeColor = Color.FromArgb(CByte(169), CByte(52), CByte(85))
+        Label39.Location = New Point(718, 457)
+        Label39.Name = "Label39"
+        Label39.Size = New Size(96, 20)
+        Label39.TabIndex = 39
+        Label39.Text = "Assign Role:"
+        ' 
+        ' Label34
+        ' 
+        Label34.AutoSize = True
+        Label34.Font = New Font("Berlin Sans FB", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label34.ForeColor = Color.FromArgb(CByte(169), CByte(52), CByte(85))
+        Label34.Location = New Point(559, 457)
+        Label34.Name = "Label34"
+        Label34.Size = New Size(83, 20)
+        Label34.TabIndex = 38
+        Label34.Text = "Password:"
+        ' 
+        ' Label31
+        ' 
+        Label31.AutoSize = True
+        Label31.Font = New Font("Berlin Sans FB", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label31.ForeColor = Color.FromArgb(CByte(169), CByte(52), CByte(85))
+        Label31.Location = New Point(394, 457)
+        Label31.Name = "Label31"
+        Label31.Size = New Size(90, 20)
+        Label31.TabIndex = 37
+        Label31.Text = "Username:"
+        ' 
+        ' Label30
+        ' 
+        Label30.AutoSize = True
+        Label30.Font = New Font("Berlin Sans FB", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label30.ForeColor = Color.FromArgb(CByte(169), CByte(52), CByte(85))
+        Label30.Location = New Point(229, 457)
+        Label30.Name = "Label30"
+        Label30.Size = New Size(97, 20)
+        Label30.TabIndex = 36
+        Label30.Text = "Last Name:"
+        ' 
+        ' Label29
+        ' 
+        Label29.AutoSize = True
+        Label29.Font = New Font("Berlin Sans FB", 10.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        Label29.ForeColor = Color.FromArgb(CByte(169), CByte(52), CByte(85))
+        Label29.Location = New Point(60, 457)
+        Label29.Name = "Label29"
+        Label29.Size = New Size(98, 20)
+        Label29.TabIndex = 35
+        Label29.Text = "First Name:"
+        ' 
+        ' ComboBox6
+        ' 
+        ComboBox6.FormattingEnabled = True
+        ComboBox6.Location = New Point(718, 488)
+        ComboBox6.Name = "ComboBox6"
+        ComboBox6.Size = New Size(165, 28)
+        ComboBox6.TabIndex = 34
+        ' 
+        ' TextBox10
+        ' 
+        TextBox10.Location = New Point(559, 488)
+        TextBox10.Name = "TextBox10"
+        TextBox10.Size = New Size(125, 27)
+        TextBox10.TabIndex = 33
+        ' 
+        ' TextBox9
+        ' 
+        TextBox9.Location = New Point(394, 488)
+        TextBox9.Name = "TextBox9"
+        TextBox9.Size = New Size(125, 27)
+        TextBox9.TabIndex = 32
+        ' 
+        ' TextBox8
+        ' 
+        TextBox8.Location = New Point(229, 488)
+        TextBox8.Name = "TextBox8"
+        TextBox8.Size = New Size(125, 27)
+        TextBox8.TabIndex = 31
+        ' 
+        ' TextBox7
+        ' 
+        TextBox7.Location = New Point(61, 488)
+        TextBox7.Name = "TextBox7"
+        TextBox7.Size = New Size(125, 27)
+        TextBox7.TabIndex = 30
+        ' 
+        ' DataGridView3
+        ' 
+        DataGridView3.BackgroundColor = Color.MistyRose
+        DataGridViewCellStyle9.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = Color.FromArgb(CByte(177), CByte(64), CByte(82))
+        DataGridViewCellStyle9.Font = New Font("Segoe UI", 9F)
+        DataGridViewCellStyle9.ForeColor = Color.White
+        DataGridViewCellStyle9.SelectionBackColor = Color.FromArgb(CByte(255), CByte(215), CByte(255))
+        DataGridViewCellStyle9.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle9.WrapMode = DataGridViewTriState.True
+        DataGridView3.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle9
+        DataGridView3.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        DataGridViewCellStyle10.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle10.BackColor = Color.FromArgb(CByte(177), CByte(64), CByte(82))
+        DataGridViewCellStyle10.Font = New Font("Segoe UI", 9F)
+        DataGridViewCellStyle10.ForeColor = SystemColors.ControlText
+        DataGridViewCellStyle10.SelectionBackColor = SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = DataGridViewTriState.False
+        DataGridView3.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridView3.EnableHeadersVisualStyles = False
+        DataGridView3.Location = New Point(61, 105)
+        DataGridView3.Margin = New Padding(2)
+        DataGridView3.Name = "DataGridView3"
+        DataGridViewCellStyle11.Alignment = DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle11.BackColor = Color.FromArgb(CByte(255), CByte(243), CByte(225))
+        DataGridViewCellStyle11.Font = New Font("Segoe UI", 9F)
+        DataGridViewCellStyle11.ForeColor = Color.Black
+        DataGridViewCellStyle11.SelectionBackColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
+        DataGridViewCellStyle11.SelectionForeColor = Color.Black
+        DataGridViewCellStyle11.WrapMode = DataGridViewTriState.True
+        DataGridView3.RowHeadersDefaultCellStyle = DataGridViewCellStyle11
+        DataGridView3.RowHeadersWidth = 62
+        DataGridViewCellStyle12.BackColor = Color.FromArgb(CByte(255), CByte(243), CByte(225))
+        DataGridViewCellStyle12.ForeColor = Color.Black
+        DataGridViewCellStyle12.SelectionBackColor = Color.FromArgb(CByte(255), CByte(192), CByte(192))
+        DataGridViewCellStyle12.SelectionForeColor = Color.Black
+        DataGridView3.RowsDefaultCellStyle = DataGridViewCellStyle12
+        DataGridView3.Size = New Size(822, 326)
+        DataGridView3.TabIndex = 29
         ' 
         ' frmAdmin
         ' 
@@ -889,6 +1122,9 @@ Partial Class frmAdmin
         pnlCategory.ResumeLayout(False)
         pnlCategory.PerformLayout()
         CType(DataGridView2, ComponentModel.ISupportInitialize).EndInit()
+        pnlAccount.ResumeLayout(False)
+        pnlAccount.PerformLayout()
+        CType(DataGridView3, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
     End Sub
 
@@ -951,4 +1187,20 @@ Partial Class frmAdmin
     Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents lblLoggedInUser As Label
     Friend WithEvents pnlAccount As Panel
+    Friend WithEvents DataGridView3 As DataGridView
+    Friend WithEvents Label39 As Label
+    Friend WithEvents Label34 As Label
+    Friend WithEvents Label31 As Label
+    Friend WithEvents Label30 As Label
+    Friend WithEvents Label29 As Label
+    Friend WithEvents ComboBox6 As ComboBox
+    Friend WithEvents TextBox10 As TextBox
+    Friend WithEvents TextBox9 As TextBox
+    Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents TextBox7 As TextBox
+    Friend WithEvents Label44 As Label
+    Friend WithEvents Label43 As Label
+    Friend WithEvents Label42 As Label
+    Friend WithEvents Label40 As Label
+    Friend WithEvents Label41 As Label
 End Class

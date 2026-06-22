@@ -28,15 +28,6 @@ Public Class frmAdmin
 
         End If
     End Sub
-    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
-        If SessionRole <> "Admin" Then
-            MsgBox("Access denied. Only Admin can access account settings.", MsgBoxStyle.Exclamation)
-            Exit Sub
-        End If
-
-        pnlAccount.Visible = True
-        pnlAccount.BringToFront()
-    End Sub
 
     Private Sub MenuLabels_Click(sender As Object, e As EventArgs) Handles Label1.Click, Label3.Click, Label7.Click, Label8.Click, Label9.Click, Label13.Click, Label14.Click, Label15.Click, Label16.Click, Label17.Click, Label18.Click
         Dim clickedLabel = CType(sender, Label)
@@ -47,6 +38,7 @@ Public Class frmAdmin
     Private Sub ShowPanel(clickedLabel As Label)
         pnlProduct.Visible = False
         pnlCategory.Visible = False
+        pnlAccount.Visible = False
 
         If clickedLabel Is Label7 Then
             pnlProduct.Visible = True
@@ -529,5 +521,216 @@ Public Class frmAdmin
         End Try
     End Sub
 
+
+
+
+
+
+
+
+
+
+
+    ' pnlAccount 
+    Private Sub LoadUsersGrid()
+        Try
+            If conn.State = ConnectionState.Closed Then conn.Open()
+            sql = "SELECT user_id AS 'User ID', " &
+              "CONCAT(first_name, ' ', last_name) AS 'Full Name', " &
+              "username AS 'Username', " &
+              "password AS 'Password', " &
+              "role AS 'Role', " &
+              "CASE WHEN status = 1 THEN 'Active' ELSE 'Inactive' END AS 'Status' " &
+              "FROM tbl_users ORDER BY user_id ASC"
+
+            DataAdapter1 = New MySqlDataAdapter(sql, conn)
+            ds = New DataSet()
+            DataAdapter1.Fill(ds, "users")
+            DataGridView3.DataSource = ds
+            DataGridView3.DataMember = "users"
+        Catch ex As Exception
+            MsgBox("Error loading users: " & ex.Message)
+        Finally
+            If conn.State = ConnectionState.Open Then conn.Close()
+        End Try
+    End Sub
+
+    Private Sub LoadUserRoles()
+        ComboBox6.Items.Clear()
+        ComboBox6.Items.Add("Admin")
+        ComboBox6.Items.Add("Staff")
+        ComboBox6.Items.Add("Limited")
+    End Sub
+
+    Private Sub DataGridView3_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView3.CellClick
+        If DataGridView3.SelectedRows.Count = 0 Then Exit Sub
+
+        Dim row = DataGridView3.SelectedRows(0)
+        Dim fullName As String = row.Cells("Full Name").Value.ToString()
+        Dim nameParts = fullName.Split(" "c)
+
+        TextBox7.Text = nameParts(0)
+        TextBox8.Text = If(nameParts.Length > 1, nameParts(1), "")
+        TextBox9.Text = row.Cells("Username").Value.ToString()
+        TextBox10.Text = ""  ' never show existing password
+        ComboBox6.SelectedItem = row.Cells("Role").Value.ToString()
+    End Sub
+
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
+        If SessionRole <> "Admin" Then
+            MsgBox("Access denied. Only Admin can access account settings.", MsgBoxStyle.Exclamation)
+            Exit Sub
+        End If
+
+        pnlAccount.Visible = True
+        pnlAccount.BringToFront()
+
+        LoadUsersGrid()
+        LoadUserRoles()
+    End Sub
+
+    ' Save — insert new account
+    Private Sub Label41_Click(sender As Object, e As EventArgs) Handles Label41.Click
+        If TextBox7.Text.Trim() = "" OrElse TextBox8.Text.Trim() = "" OrElse
+           TextBox9.Text.Trim() = "" OrElse TextBox10.Text.Trim() = "" OrElse
+           ComboBox6.SelectedIndex = -1 Then
+            MsgBox("Please fill in all fields.")
+            Exit Sub
+        End If
+
+        Try
+            If conn.State = ConnectionState.Closed Then conn.Open()
+            sql = "INSERT INTO tbl_users (first_name, last_name, username, password, role, status) VALUES ('" &
+                  TextBox7.Text.Trim() & "', '" & TextBox8.Text.Trim() & "', '" &
+                  TextBox9.Text.Trim() & "', '" & TextBox10.Text.Trim() & "', '" &
+                  ComboBox6.SelectedItem.ToString() & "', 1)"
+            dbcomm = New MySqlCommand(sql, conn)
+            Dim i = dbcomm.ExecuteNonQuery()
+
+            If i > 0 Then
+                MsgBox("Account created successfully.")
+                ClearUserFields()
+                LoadUsersGrid()
+            Else
+                MsgBox("Account was not created.")
+            End If
+        Catch ex As Exception
+            MsgBox("Error: " & ex.Message)
+        Finally
+            If conn.State = ConnectionState.Open Then conn.Close()
+        End Try
+    End Sub
+
+    ' Update — edit name, role, or reset password (cannot edit own account)
+    Private Sub Label42_Click(sender As Object, e As EventArgs) Handles Label42.Click
+        If DataGridView3.SelectedRows.Count = 0 Then
+            MsgBox("Please select a user to update.")
+            Exit Sub
+        End If
+
+        Dim selectedUserId As Integer = Convert.ToInt32(DataGridView3.SelectedRows(0).Cells("User ID").Value)
+
+        ' Prevent admin from changing their own role
+        If selectedUserId = SessionUserId Then
+            MsgBox("You cannot edit your own account.")
+            Exit Sub
+        End If
+
+        If TextBox7.Text.Trim() = "" OrElse TextBox8.Text.Trim() = "" OrElse
+           ComboBox6.SelectedIndex = -1 Then
+            MsgBox("Please fill in all required fields.")
+            Exit Sub
+        End If
+
+        Dim confirm = MsgBox("Update this account?", MsgBoxStyle.YesNo, "Confirm Update")
+        If confirm = MsgBoxResult.No Then Exit Sub
+
+        Try
+            If conn.State = ConnectionState.Closed Then conn.Open()
+
+            ' Update password only if a new one was typed
+            If TextBox10.Text.Trim() <> "" Then
+                sql = "UPDATE tbl_users SET first_name = '" & TextBox7.Text.Trim() & "', " &
+                      "last_name = '" & TextBox8.Text.Trim() & "', " &
+                      "role = '" & ComboBox6.SelectedItem.ToString() & "', " &
+                      "password = '" & TextBox10.Text.Trim() & "' " &
+                      "WHERE user_id = " & selectedUserId
+            Else
+                sql = "UPDATE tbl_users SET first_name = '" & TextBox7.Text.Trim() & "', " &
+                      "last_name = '" & TextBox8.Text.Trim() & "', " &
+                      "role = '" & ComboBox6.SelectedItem.ToString() & "' " &
+                      "WHERE user_id = " & selectedUserId
+            End If
+
+            dbcomm = New MySqlCommand(sql, conn)
+            Dim i = dbcomm.ExecuteNonQuery()
+
+            If i > 0 Then
+                MsgBox("Account updated successfully.")
+                ClearUserFields()
+                LoadUsersGrid()
+            Else
+                MsgBox("Account was not updated.")
+            End If
+        Catch ex As Exception
+            MsgBox("Error: " & ex.Message)
+        Finally
+            If conn.State = ConnectionState.Open Then conn.Close()
+        End Try
+    End Sub
+
+    ' Deactivate — set status = 0
+    Private Sub Label43_Click(sender As Object, e As EventArgs) Handles Label43.Click
+        If DataGridView3.SelectedRows.Count = 0 Then
+            MsgBox("Please select a user to deactivate.")
+            Exit Sub
+        End If
+
+        Dim selectedUserId As Integer = Convert.ToInt32(DataGridView3.SelectedRows(0).Cells("User ID").Value)
+
+        If selectedUserId = SessionUserId Then
+            MsgBox("You cannot deactivate your own account.")
+            Exit Sub
+        End If
+
+        Dim confirm = MsgBox("Deactivate this account? They will no longer be able to log in.",
+                             MsgBoxStyle.YesNo, "Confirm Deactivate")
+        If confirm = MsgBoxResult.No Then Exit Sub
+
+        Try
+            If conn.State = ConnectionState.Closed Then conn.Open()
+            sql = "UPDATE tbl_users SET status = 0 WHERE user_id = " & selectedUserId
+            dbcomm = New MySqlCommand(sql, conn)
+            Dim i = dbcomm.ExecuteNonQuery()
+
+            If i > 0 Then
+                MsgBox("Account deactivated successfully.")
+                ClearUserFields()
+                LoadUsersGrid()
+            Else
+                MsgBox("Account was not deactivated.")
+            End If
+        Catch ex As Exception
+            MsgBox("Error: " & ex.Message)
+        Finally
+            If conn.State = ConnectionState.Open Then conn.Close()
+        End Try
+    End Sub
+
+    ' Refresh
+    Private Sub Label40_Click(sender As Object, e As EventArgs) Handles Label40.Click
+        LoadUsersGrid()
+        ClearUserFields()
+        MsgBox("User list refreshed.")
+    End Sub
+
+    ' Clear fields
+    Private Sub ClearUserFields()
+        TextBox7.Clear()
+        TextBox8.Clear()
+        TextBox9.Clear()
+        TextBox10.Clear()
+        ComboBox6.SelectedIndex = -1
+    End Sub
 
 End Class
