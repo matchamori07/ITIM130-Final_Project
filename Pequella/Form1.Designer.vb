@@ -28,6 +28,12 @@ Partial Class Form1
         Button1 = New Button()
         Label1 = New Label()
         Panel2 = New Panel()
+        TextBox2 = New TextBox()
+        Label7 = New Label()
+        Label6 = New Label()
+        Label5 = New Label()
+        Label4 = New Label()
+        CheckBox1 = New CheckBox()
         Label37 = New Label()
         Label38 = New Label()
         Panel5 = New Panel()
@@ -121,6 +127,12 @@ Partial Class Form1
         ' 
         Panel2.BackColor = Color.FromArgb(CByte(255), CByte(248), CByte(240))
         Panel2.BackgroundImageLayout = ImageLayout.None
+        Panel2.Controls.Add(TextBox2)
+        Panel2.Controls.Add(Label7)
+        Panel2.Controls.Add(Label6)
+        Panel2.Controls.Add(Label5)
+        Panel2.Controls.Add(Label4)
+        Panel2.Controls.Add(CheckBox1)
         Panel2.Controls.Add(Label37)
         Panel2.Controls.Add(Label38)
         Panel2.Controls.Add(Panel5)
@@ -136,15 +148,75 @@ Partial Class Form1
         Panel2.TabIndex = 4
         Panel2.Visible = False
         ' 
+        ' TextBox2
+        ' 
+        TextBox2.Location = New Point(591, 646)
+        TextBox2.Name = "TextBox2"
+        TextBox2.Size = New Size(164, 27)
+        TextBox2.TabIndex = 25
+        ' 
+        ' Label7
+        ' 
+        Label7.AutoSize = True
+        Label7.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold)
+        Label7.Location = New Point(480, 649)
+        Label7.Name = "Label7"
+        Label7.Size = New Size(102, 20)
+        Label7.TabIndex = 24
+        Label7.Text = "Amount Paid:"
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Location = New Point(591, 623)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(36, 20)
+        Label6.TabIndex = 23
+        Label6.Text = "0.00"
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold)
+        Label5.Location = New Point(535, 623)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(46, 20)
+        Label5.TabIndex = 22
+        Label5.Text = "Total:"
+        ' 
+        ' Label4
+        ' 
+        Label4.BackColor = Color.FromArgb(CByte(177), CByte(64), CByte(82))
+        Label4.BorderStyle = BorderStyle.FixedSingle
+        Label4.Font = New Font("Bernard MT Condensed", 12F)
+        Label4.ForeColor = SystemColors.ControlLightLight
+        Label4.Location = New Point(745, 573)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(132, 37)
+        Label4.TabIndex = 21
+        Label4.Text = "Calculate"
+        Label4.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' CheckBox1
+        ' 
+        CheckBox1.AutoSize = True
+        CheckBox1.Font = New Font("Berlin Sans FB", 10.2F)
+        CheckBox1.Location = New Point(54, 582)
+        CheckBox1.Name = "CheckBox1"
+        CheckBox1.Size = New Size(143, 23)
+        CheckBox1.TabIndex = 20
+        CheckBox1.Text = "Retail Customer"
+        CheckBox1.UseVisualStyleBackColor = True
+        ' 
         ' Label37
         ' 
         Label37.BackColor = Color.FromArgb(CByte(177), CByte(64), CByte(82))
         Label37.BorderStyle = BorderStyle.FixedSingle
         Label37.Font = New Font("Bernard MT Condensed", 12F)
         Label37.ForeColor = SystemColors.ControlLightLight
-        Label37.Location = New Point(525, 582)
+        Label37.Location = New Point(487, 573)
         Label37.Name = "Label37"
-        Label37.Size = New Size(150, 37)
+        Label37.Size = New Size(146, 37)
         Label37.TabIndex = 19
         Label37.Text = "Add Product"
         Label37.TextAlign = ContentAlignment.MiddleCenter
@@ -155,9 +227,9 @@ Partial Class Form1
         Label38.BorderStyle = BorderStyle.FixedSingle
         Label38.Font = New Font("Bernard MT Condensed", 12F)
         Label38.ForeColor = SystemColors.ControlLightLight
-        Label38.Location = New Point(693, 583)
+        Label38.Location = New Point(638, 573)
         Label38.Name = "Label38"
-        Label38.Size = New Size(150, 37)
+        Label38.Size = New Size(102, 37)
         Label38.TabIndex = 18
         Label38.Text = "Delete"
         Label38.TextAlign = ContentAlignment.MiddleCenter
@@ -212,9 +284,9 @@ Partial Class Form1
         ' 
         Button3.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
         Button3.ForeColor = Color.FromArgb(CByte(155), CByte(49), CByte(97))
-        Button3.Location = New Point(776, 635)
+        Button3.Location = New Point(779, 642)
         Button3.Name = "Button3"
-        Button3.Size = New Size(98, 30)
+        Button3.Size = New Size(98, 27)
         Button3.TabIndex = 16
         Button3.Text = "proceed >"
         Button3.UseVisualStyleBackColor = True
@@ -223,7 +295,7 @@ Partial Class Form1
         ' 
         Button12.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
         Button12.ForeColor = Color.FromArgb(CByte(155), CByte(49), CByte(97))
-        Button12.Location = New Point(29, 635)
+        Button12.Location = New Point(32, 639)
         Button12.Name = "Button12"
         Button12.Size = New Size(81, 30)
         Button12.TabIndex = 15
@@ -323,6 +395,7 @@ Partial Class Form1
         Panel1.ResumeLayout(False)
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         Panel2.ResumeLayout(False)
+        Panel2.PerformLayout()
         Panel5.ResumeLayout(False)
         Panel5.PerformLayout()
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
@@ -355,5 +428,11 @@ Partial Class Form1
     Friend WithEvents ColumnHeader2 As ColumnHeader
     Friend WithEvents ColumnHeader3 As ColumnHeader
     Friend WithEvents Label97 As Label
+    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label5 As Label
 
 End Class
